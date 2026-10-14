@@ -54,7 +54,8 @@ build, never the thinking. One visible line, ceremony matched to size:
    - **Quick-fix** → tiny, obvious, low-risk, reversible. Build directly.
    - **Paper cut** → write the card. S and clearly aligned: build after the
      triage note. M or ambiguous: propose the card, get approval first.
-   - **Research** → topic in `PRODUCT.md`; research, then decide.
+   - **Research** → topic in `PRODUCT.md`; research, then decide (run it
+     through the `studio-research` skill, `skills/studio-research/`).
    - **Idea** → inbox. Acknowledge briefly, don't build.
    - **Question** → answer. No build.
 2. **Say the triage out loud** — one line ("Triage: quick-fix → building
@@ -169,7 +170,9 @@ When a product decision hinges on an unknown — feasibility, cost, whether
 something is overengineering — it becomes a research topic in the product's
 `PRODUCT.md` first: the question, why it matters now, succinct findings, then
 the decision. Even "don't build it" counts as a decision. Research is how a
-one-man studio borrows the diligence of a bigger team.
+one-man studio borrows the diligence of a bigger team. The protocol lives in
+the `studio-research` skill (`skills/studio-research/`): fixed method,
+standardized write-up, decision-ready and logged — never only in chat.
 
 ## Definition of done
 

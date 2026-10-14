@@ -64,8 +64,8 @@ of four live products:
 |---|---|---|---|
 | Closet | AI wardrobe stylist | [app](https://closet-404e9.web.app) | [repo](https://github.com/nachiketmparanjape/the-closet) |
 | Fluencia | AI language tutor | [app](https://fluencia.vercel.app) | private |
-| One at a Time | Next-right-thing task picker | [app](https://one-at-a-time.vercel.app) | [repo](https://github.com/nachiketmparanjape/one_at_a_time) |
-| Vocab Quiz | Personal vocab, spaced repetition | [app](https://vocab-quiz.vercel.app) | [repo](https://github.com/nachiketmparanjape/vocab_quiz) |
+| One at a Time | Next-right-thing task picker | [app](https://oneatatime-seven.vercel.app) | [repo](https://github.com/nachiketmparanjape/one_at_a_time) |
+| Vocab Quiz | Personal vocab, spaced repetition | [app](https://vocabquiz-lake.vercel.app) | [repo](https://github.com/nachiketmparanjape/vocab_quiz) |
 
 The [case study](case-study/) folder holds a real product's paper
 trail: two sprint plans and its shipped log, unedited.
@@ -76,6 +76,11 @@ trail: two sprint plans and its shipped log, unedited.
 - `PLAYBOOK.md` — the full operating system, as run day to day.
 - `skills/studio-triage/` — the request-triage workflow in
   machine-readable form (the PM gate, exactly as the AI follows it).
+- `skills/studio-research/` — the research protocol: same method every time
+  (context, decompose, multi-source verification with confidence levels),
+  same output shape (TL;DR → findings → options with tradeoffs →
+  recommendation → sources), always logged to the inbox or a product's
+  `PRODUCT.md`, never only in chat.
 - `templates/` — paper-cut card, sprint plan, backlog, and vision
   templates.
 - `dashboard/` — the generator that compiles the studio's markdown
