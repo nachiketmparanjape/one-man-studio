@@ -24,7 +24,8 @@ Add hats (designer, marketer) only when a product earns them, never before.
 - **Build:** Engineer builds, then runs the **verifier gate** before anything
   reaches the founder: a structured self-audit against the card's acceptance
   criteria — install, build, type checks and linters, whatever can be
-  exercised headlessly — reporting what was checked and what still needs
+  exercised headlessly — plus the checklists in `standards/` (starting with
+  error handling), reporting what was checked and what still needs
   human eyes. The founder's phone test is the final gate, never the first
   debugging pass.
 - **Review + retro, 15 min:** demo what shipped, then one retro question:

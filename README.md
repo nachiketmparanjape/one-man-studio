@@ -81,6 +81,10 @@ trail: two sprint plans and its shipped log, unedited.
   same output shape (TL;DR → findings → options with tradeoffs →
   recommendation → sources), always logged to the inbox or a product's
   `PRODUCT.md`, never only in chat.
+- `standards/` — studio-wide engineering standards: how every app does the
+  boring-but-critical things (error handling, testing, deploys…) the same
+  way, without reinventing them per project. A topic earns standard status
+  when two products need it.
 - `templates/` — paper-cut card, sprint plan, backlog, and vision
   templates.
 - `dashboard/` — the generator that compiles the studio's markdown
