@@ -10,14 +10,14 @@ enough to write down once.
 - [error-handling.md](error-handling.md) — the two-bucket taxonomy,
   HttpsError codes on the wire, boundary placement, structured logging,
   Sentry on every product. Adopted 2026-10-14.
+- [testing.md](testing.md) — the pyramid studio-sized: plain unit tests,
+  testable function handlers, emulator-over-mocks integration, rules
+  tests, 5–8 E2E critical paths; what "verified" means per layer.
+  Adopted 2026-10-14.
 
 **Proposed** (each becomes a standard the same way error-handling did:
 research → proposal → founder approval → written once):
 
-- **testing** — what gets tested and how: emulator-first for Firebase,
-  headless exercise before founder testing, what "verified" means per
-  layer. Why: the verifier gate keeps referring to "whatever can be
-  exercised headlessly" — that phrase deserves a definition.
 - **logging-and-observability** — structured logging conventions, what
   gets a correlation id, Sentry alert thresholds, what pages the
   founder. Why: error-handling covers *capturing* errors; this covers
