@@ -14,27 +14,23 @@ enough to write down once.
   testable function handlers, emulator-over-mocks integration, rules
   tests, 5–8 E2E critical paths; what "verified" means per layer.
   Adopted 2026-10-14.
+- [logging-and-observability.md](logging-and-observability.md) —
+  structured JSON logging, correlation ids, the three watch layers
+  (Sentry, uptime, cost), alert rules with actions. Adopted 2026-10-14.
+- [secrets-and-security.md](secrets-and-security.md) — Secret Manager
+  for server secrets, `.env.example` committed, `600`-perm local
+  credentials, fail-fast config, the per-cut security checklist, the
+  leak playbook. Adopted 2026-10-14.
+- [code-style.md](code-style.md) — TS strict, ESLint + Prettier in CI,
+  naming, React and functions discipline. Adopted 2026-10-14.
+- [ci-cd-and-deploys.md](ci-cd-and-deploys.md) — GitHub as source of
+  truth, CI deploys Hosting only, functions/rules deploy manually
+  after review, what "done" means, rollback before diagnosis.
+  Adopted 2026-10-14.
+- [documentation.md](documentation.md) — the rule of place (every fact
+  in exactly one place), the README standard, living docs, decisions
+  as records. Adopted 2026-10-14.
 
-**Proposed** (each becomes a standard the same way error-handling did:
-research → proposal → founder approval → written once):
-
-- **logging-and-observability** — structured logging conventions, what
-  gets a correlation id, Sentry alert thresholds, what pages the
-  founder. Why: error-handling covers *capturing* errors; this covers
-  *noticing* them.
-- **code-style** — lint/format configs, naming, TypeScript strictness,
-  shared across repos. Why: four repos, one brain — consistency is a
-  feature when you're the whole team.
-- **ci-cd-and-deploys** — the deploy conventions: CI deploys Hosting
-  only, functions/rules deploy manually after review, what "done"
-  means for a deploy. Why: this pattern already exists (Closet) but
-  only lives in one sprint plan.
-- **documentation** — the README standard, PRODUCT.md/SHIPPED.md
-  discipline, what lives in GitHub vs. the studio. Why: the README haul
-  proved docs rot without a standard.
-- **secrets-and-security** — secret storage, the auth-check order,
-  Firestore/Storage rules review cadence. Why: one leaked key ends the
-  studio; the practice should be written, not remembered.
-
-Propose a new standard by saying so — it goes through research and
-founder approval like any paper cut, then lives here.
+**Proposing a new standard:** it goes through research and founder
+approval like any paper cut, then lives here. If only one product
+needs it, it stays in that product's docs until the second one does.
