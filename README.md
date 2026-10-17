@@ -91,7 +91,15 @@ trail: two sprint plans and its shipped log, unedited.
   files into the [live HQ dashboard](https://bramble-studio.web.app),
   including the script-generated `STATE.md` (key numbers no agent
   hand-edits).
+- [`issues`](https://github.com/nachiketmparanjape/one-man-studio/issues?q=is%3Aissue+label%3Astudio-mirror)
+  — the public paper-cut mirror: every committed cut across products,
+  synced from the markdown by `mirror.py` (same "generated, not hand-edited"
+  rule as the dashboard). Filter by `label:studio-mirror`.
 - `case-study/` — one product's real sprint plans and shipped log.
+- `RUNTIME.md` — what the system needs from its host (token, scheduler, …)
+  and what degrades gracefully without each. The agent-agnosticism contract.
+- `ONBOARDING.md` — how a new agent takes over the studio: read order,
+  first tasks, how to keep every surface fresh.
 
 ## What transfers, and what doesn't
 

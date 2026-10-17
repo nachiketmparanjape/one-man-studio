@@ -91,6 +91,11 @@ Current workflows:
 - **Research before building** — topic → findings → decision (see above).
 - **Dashboard refresh** — regenerate → redeploy, after planning / shipping /
   inbox triage (procedure in `dashboard/dashboard.py`).
+- **Mirror sync** — `python3 mirror.py` (in the studio workspace) after
+  planning / shipping / inbox triage, alongside the dashboard refresh. The
+  GitHub issues mirror is GENERATED from the product markdown — never
+  hand-edit issues; fix the docs and re-run. A new product with the
+  standard `docs/` layout is picked up automatically, no registration.
 - **Standing duties** — tool scout, curator + cost audit, competitor watch
   (see below); scheduled, inbox-reported, founder interrupted only on signal.
 
