@@ -64,6 +64,11 @@ build, never the thinking. One visible line, ceremony matched to size:
    request entered.
 3. **Log the outcome** in the right file (sprint plan, `SHIPPED.md`,
    `friction.md`, inbox, `PRODUCT.md`). Nothing lives only in chat.
+4. **Issue first, sprint second**: every idea enters as a triaged backlog
+   issue with clear scope; sprint assignment happens at planning, never
+   preemptively. Proposal/design docs for un-pulled work live in
+   `docs/proposals/`, not `docs/sprints/` — a sprint folder implies a
+   sprint that doesn't exist yet.
 
 The machine-readable version lives in the `studio-triage` skill
 (`skills/studio-triage/` in this repo) — same workflow, followed the same way
