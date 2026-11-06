@@ -24,7 +24,7 @@ breaking.
   but the Kanban board (`setup_board.py`) can't be created or managed.
   Issues alone remain the source of truth; the board is the UI.
 - **A scheduler** (cron or equivalent) for the standing duties: monthly
-  tool scout, monthly curator + cost audit, nightly debrief nudge. Without
+  tool scout, monthly curator + cost audit, monthly doc review, nightly debrief nudge. Without
   it, everything still works interactively — the proactive jobs just don't
   fire on their own.
 - **A host that can run long commands** (deploys, builds, test suites).

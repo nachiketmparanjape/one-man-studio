@@ -118,7 +118,7 @@ build, never the thinking. One visible line, ceremony matched to size:
    implies a sprint that doesn't exist yet.
 
 The machine-readable version lives in the `studio-triage` skill
-(`~/workspace/skills/studio-triage/`) — same workflow, followed the same way
+(`~/workspace/custom-skills/studio-triage/`) — same workflow, followed the same way
 every time, by me or any other AI on this system.
 
 ## Workflows (the concept)
@@ -128,7 +128,7 @@ twice, or anything where ad-hoc execution risks quality, gets a defined
 workflow** — named steps, in order, each with its log destination. No
 workflow, no reliability; no reliability, no trust.
 
-- Workflows live as skill files under `~/workspace/skills/` (the executable
+- Workflows live as skill files under `~/workspace/custom-skills/` (the executable
   definition) and are registered below (the human-readable map).
 - New workflows get proposed by either of us — usually surfacing through the
   retro question — and added here once they've earned their keep.
@@ -148,8 +148,9 @@ Current workflows:
   GENERATED from the markdown — never hand-edit issues; fix the docs and
   re-run. A new product with the standard `docs/` layout is picked up
   automatically, no registration.
-- **Standing duties** — tool scout, curator + cost audit, competitor watch
-  (see below); scheduled, inbox-reported, founder interrupted only on signal.
+- **Standing duties** — tool scout, curator + cost audit, competitor watch,
+  doc review (see below); scheduled, inbox-reported, founder interrupted
+  only on signal.
 
 ## Anti-scatter rules
 
@@ -199,6 +200,17 @@ inbox and only interrupts the founder when something earns it.
   competitor picture for whichever product has an active sprint — what
   changed, what's suddenly cloneable — sourced, one short section, no
   rabbit holes.
+- **Doc review** (monthly, 5th; system spec `DOC-REVIEW.md`, skill
+  `studio-doc-review`): one pass over every document in the studio and
+  the product repos — GitHub-vs-local sync, staleness against reality,
+  purpose drift (every document has one purpose code and a Purpose
+  header; the taxonomy lives in `DOC-REVIEW.md`), a deep check of the
+  key-document register, and the **reaper**: retirement verdicts
+  (keep / repair / split / merge / supersede / archive / delete)
+  proposed to the founder, never silently applied. Mechanical
+  evidence comes from `doc_audit.py`; reports land in
+  `doc-reviews/YYYY-MM.md` with an inbox pointer. Records are never
+  content-edited or deleted.
 
 ## Where things live
 
@@ -262,6 +274,118 @@ improvement notes, and code pointers. Example: `docs/PERSONALIZATION.md`
 in the Closet repo. Cut records stay in `docs/sprints/<n>/`; the living
 spec lives at the product-doc level and points back.
 
+## Important invisibles (founder 2026-10-24)
+
+The design-doc rule covers systems that are *complex*. This doctrine
+covers the sharper case the founder named: structures that are
+**hidden but carry long-term value** — error/event data models,
+engineering orchestration, identity, cost metering, context models.
+Nobody sees them in the product, yet their shape decides whether the
+product can evolve. AI-built code makes the risk specific: what an
+agent builds is inherently imprecise and ephemeral — it compiles, it
+ships, and its design intent evaporates. The counterweight is
+**robust visibility**: a important invisible is not done when it
+works; it is done when its design is *provably* what the doc says it
+is, so the founder — or anyone — can read it, challenge it, and
+suggest improvements to the fundamental structure.
+
+**Identification — an agent flags a structure as an important
+invisible when most of these hold:**
+1. It is not user-facing; its value is entirely downstream.
+2. Other features depend on its shape (schema, taxonomy, protocol),
+   so changing it later means migrating dependents.
+3. Its failure is silent or discovered late (bad data, lost signal,
+   quiet degradation) rather than loud.
+4. Left undesigned, it will accrete ad hoc — one field, one special
+   case at a time — and the accretions become the de facto design.
+5. It is the kind of thing the founder would want to *review as a
+   design*, not discover as a surprise.
+
+**Treatment — the standardization proof stack.** A flagged
+structure gets three things, in this order:
+1. **A living design doc** (per the design-doc rule): the design
+   and *why*, alternatives considered, full schemas, code pointers,
+   and numbered open improvement points (OP-n) so improvements can
+   be proposed against something concrete. The doc follows the
+   design-documents standard (`standards/design-documents.md`,
+   adopted 2026-10-24): plain language with a controlled
+   vocabulary and a glossary, Mermaid diagrams for flow and
+   structure, rules as tables — and founder review happens in a
+   GitHub pull request, with questions and suggested changes on
+   the lines they concern.
+2. **A visibility surface** that reads the structure back: a report,
+   a ledger query, invariant tests — some artifact that *proves*
+   the running system matches the doc (e.g. OBSERVABILITY.md's
+   quality report proves events land with their keys; layout
+   invariant tests prove the overlay standard holds). A doc with no
+   way to check it against reality is a claim, not a standard.
+3. **Doc-in-the-same-commit discipline:** extending the structure
+   without updating its doc is a defect of the cut, like a missing
+   test.
+
+**Agent protocol.**
+- *Building or touching one:* check its doc exists and matches
+  before extending it. If none exists, create the doc as part of
+  the cut (or first, if the founder flags the structure).
+- *The founder points at one* ("this needs careful design"): stop
+  building, design in the open, doc first — consultation-class,
+  never execute-class.
+- *Planning/reviewing:* name the invisibles the work touches, the
+  way a sprint plan names its cards. A cut that quietly reshapes
+  one is a scope change, surfaced as such.
+- *Retrofitting:* when an existing invisible is found undesigned,
+  the move is OBS-2's shape — audit what exists, write the doc
+  from the evidence, then fix the structure to match the design,
+  with the visibility surface built in the same pass so the fix
+  stays fixed.
+- *Redesign pending:* when a structure is slated for a bottom-up
+  redesign, features that would extend the current version queue
+  BEHIND the redesign, never in front of it — staged additions to
+  a condemned architecture are rework by definition (founder,
+  2026-10-24, on PC-41 vs the UX-18 stylist-chat rethink).
+
+**Register (Closet — full sweep 2026-10-24).** Status per
+structure: doc / visibility surface / gap.
+- **Observability** (errors, cost, events) — `docs/OBSERVABILITY.md`
+  ✔ full stack: taxonomy + ledgers + quality/usage reports +
+  heartbeat probe + tests. Model example.
+- **Deploy & operations pipeline** — `docs/OPERATIONS.md` ✔
+  (2026-10-24): deploy rules (each a scar), recovery playbook,
+  verification standard. Gap: CI hosting deploys still broken
+  (its OP-1); no one-command live-status (OP-3).
+- **Catalog data model** — `docs/DATA_MODEL.md` ✔ doc (v2, 2026-10-14).
+  Partial surface: shapes enforced in code + tests, no drift
+  check between doc and live documents. Gap candidate: a light
+  schema-drift spot-check in the quality report's family.
+- **Design system** — `docs/DESIGN.md` ✔ doc + token source +
+  layout invariant tests (proof stack complete).
+- **Personalization** (vibe + learned profile) — `docs/PERSONALIZATION.md`
+  ✔ doc (2026-10-18); the lanes metrics are its surface.
+- **Stylist chat (experience + architecture, incl. the context
+  model)** — ✘ NO DOC. The whole chat is slated for a bottom-up
+  rethink, designed completely rather than in stages (founder,
+  2026-10-24). Five+ context sources (todayPick, previousPick,
+  @-refs, pins, trip context, learned profiles, weather) with
+  precedence/lifetime rules living only in code and session
+  memory; UX-18 exhibit #1 (cold-open auto-attach) is a symptom.
+  Consequence: chat-extending cards queue behind the redesign —
+  PC-38, PC-41, PC-32/PC-33 are all held for it, not just the
+  context work. Treatment (founder's route call, 2026-10-24):
+  left entirely to the UX-18 sit-down — no solo inventory
+  draft; discovery and decisions happen jointly in the session,
+  and the doc lands as `docs/CONTEXT-MODEL.md`.
+- **Identity / auth** — ✘ NO DOC. Anonymous-first + upgrade
+  paths + guest migration + a known cookie-stability blocker,
+  all in code/session memory. Treatment: doc when Account next
+  opens (UX-17's trigger) or if auth behavior changes first.
+- **AI prompt layer** (stylist/describe/packing/shop prompts +
+  validation & self-heal rules) — partial: prompts live in code
+  with tests; the *design* (why these rules, what may not
+  change casually) is spread across PERSONALIZATION.md,
+  OBSERVABILITY.md's event taxonomy, and sprint records.
+  Candidate: fold into CONTEXT-MODEL.md's scope or its own doc
+  when the stylist next gets a structural change.
+
 ## Sprint planning algorithm (founder 2026-10-18, HARD RULE)
 Sprint planning ALWAYS walks the FULL idea inventory before proposing —
 no cherry-picking from memory. The inventory, in order:
@@ -284,3 +408,15 @@ the shipped half is recorded in SHIPPED.md, the remainder is re-filed as
 its own card with its own scope. A card describing already-shipped work is
 closed, not re-proposed. This check runs inside the planning walk, and the
 monthly curator repeats it as backlog hygiene.
+
+**Aging disposition (founder 2026-10-20):** the walk *sees* every item,
+but seeing is not deciding — an item can be looked at and silently
+deferred forever. So: any open, not-started item whose card is **more
+than a month old** gets flagged in the walk, and the PM's ranked list
+carries an explicit one-line disposition for each flagged item —
+**keep** (with the reason it still earns its place), **kill** (close the
+card and let the mirror close the issue), or **split** (the live half
+re-filed fresh, the stale half closed). The flag clears only via a
+recorded disposition, never via another quiet deferral. The monthly
+curator reports any flagged item that has survived two walks without a
+disposition.

@@ -45,8 +45,36 @@ Every decision gets one line somewhere permanent: what was decided,
 when, and the one-line why. Research ends in a decision — even "don't
 build it" counts. A decision that lives only in chat didn't happen.
 
+## The Purpose header (adopted 2026-10-24)
+
+Every living or decision document carries a brief header under its
+title — the document's intentionality, written down so a review can
+test it:
+
+```
+> **Purpose:** <CODE> — who reads this, the question it answers.
+> **Earns its place if:** the decision or action it must support.
+> **Owner:** who keeps it true. **Status:** living.
+> **Last verified:** YYYY-MM-DD, against <the evidence checked>.
+```
+
+Purpose codes (one per document — a document doing two jobs is
+drifting): **ORIENT** (give me the picture), **DECIDE** (what we
+settled), **EXPLAIN** (how/why it works), **REFERENCE** (the exact
+fact), **OPERATE** (how to do the task), **TRACK** (state / what's
+next), **RECORD** (what happened then). The full taxonomy, the
+lifecycle classes (living / decision / proposal / record /
+generated), and the header rules for records and generated documents
+live in `~/workspace/studio/DOC-REVIEW.md`, which governs the monthly
+review. Records are never retro-fitted or content-edited; the header
+applies to living documents and to new documents at creation.
+
 ## Maintenance
 
-Docs are reviewed the way code is: the monthly curator flags rot
-(outdated READMEs, `PRODUCT.md` disagreeing with the app, dead links)
-as proposals, not silent edits. The founder approves; the agent fixes.
+Docs are reviewed the way code is: the monthly **Doc Review**
+(`DOC-REVIEW.md`, the `studio-doc-review` skill, monthly on the 5th)
+checks sync with GitHub, staleness against reality, and purpose
+drift, and brings retirement calls (the reaper: keep / repair /
+split / merge / supersede / archive / delete) to the founder as
+proposals, not silent edits. The curator's backlog pass no longer
+carries documentation rot. The founder approves; the agent fixes.

@@ -30,6 +30,13 @@ enough to write down once.
 - [documentation.md](documentation.md) — the rule of place (every fact
   in exactly one place), the README standard, living docs, decisions
   as records. Adopted 2026-10-14.
+- [design-documents.md](design-documents.md) — design documents in
+  plain language: one fixed vocabulary with a glossary, diagrams, rules
+  as tables; a cold reader must be able to challenge the design.
+  Adopted 2026-10-24.
+- [shareable-cards.md](shareable-cards.md) — backlog cards written so
+  two cold readers can use them: status, plain-words summary, checkable
+  details, questions for a reader, history. Adopted 2026-10-25.
 
 **Proposing a new standard:** it goes through research and founder
 approval like any paper cut, then lives here. If only one product

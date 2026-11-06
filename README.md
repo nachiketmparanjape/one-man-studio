@@ -32,7 +32,7 @@ it was proven.
 
 ## How it works
 
-- **2-week sprints**, fixed dates: 15-min planning, build, 15-min
+- **Sprints as batches of work**, not fixed dates: 15-min planning, build, 15-min
   review + one retro question — *"What should we change about how we
   work?"*
 - **Paper cuts** as the unit of work: one small, shippable improvement
@@ -49,8 +49,9 @@ it was proven.
   research / idea / question), announce the routing in one line, log
   the outcome in a file. Nothing lives only in chat.
 - **Standing duties:** scheduled agent passes — a monthly tool scout,
-  a monthly curator (backlog hygiene + cost audit + competitor watch)
-  — that report through the inbox and interrupt only on signal.
+  a monthly curator (backlog hygiene + cost audit + competitor watch),
+  a monthly doc review (GitHub sync, purpose drift, reaper) — that
+  report through the inbox and interrupt only on signal.
 - **Evidence by default:** sprint plans, shipped logs, decision
   records, and a script-generated state file. Done means shipped to
   production via CI/CD **and** tested by the founder on a real device.
