@@ -1,5 +1,10 @@
 # Studio standard: design documents (language + format)
 
+> **Purpose:** DECIDE — the settled rules for design documents: plain language with one name per thing, a glossary, diagrams, rules as tables, and the required shape of a document.
+> **Earns its place if:** a design document written under it can be read cold by the founder and challenged — and a tangled diagram gets redrawn instead of left confusing.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 **Status:** active · **Adopted:** 2026-10-24 (founder feedback:
 the Sprint 23 audit was accurate and unreadable — insider
 words with no definitions, so a human reader could not tie
@@ -68,6 +73,9 @@ parts, in this order:
    - one diagram that shows the structure (what parts
      exist and how they connect) or the life of a thing
      (how a piece of data starts, changes, and ends).
+   If one Mermaid diagram becomes tangled, redraw that one diagram in
+   D2 (TALA layout), commit the `.d2` source plus the exported SVG,
+   and embed the SVG — do not migrate the rest.
 4. **How it works** — numbered steps, in the order they
    happen, each step one or two sentences.
 5. **Rules in tables** — precedence ("who wins when two

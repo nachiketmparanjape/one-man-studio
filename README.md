@@ -1,5 +1,10 @@
 # The One-Man Studio
 
+> **Purpose:** ORIENT — the studio in 60 seconds for a stranger: the idea, how it works, the live proof, and what transfers and what doesn't.
+> **Earns its place if:** a stranger understands what this is and whether it fits their own smallest-possible company — without reading anything else.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 **The governance layer for the smallest possible company: AI holds the
 structure, humans hold judgment.**
 

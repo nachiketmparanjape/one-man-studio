@@ -1,5 +1,10 @@
 # Studio standard: documentation
 
+> **Purpose:** DECIDE — the settled documentation rules: the rule of place (every fact in exactly one place), the README standard, living docs, decisions as records, and the Purpose header itself.
+> **Earns its place if:** a fact lands in exactly one place, and a living document carries a header the monthly review can test.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 **Status:** active · **Adopted:** 2026-10-14
 
 Docs rot without a standard. This one says what gets written, where it

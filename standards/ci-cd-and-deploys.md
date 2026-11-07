@@ -1,5 +1,10 @@
 # Studio standard: CI/CD and deploys
 
+> **Purpose:** DECIDE — the settled pipeline: GitHub is the source of truth, CI deploys Hosting only, functions and rules deploy manually after review, and what "done" means.
+> **Earns its place if:** a deploy follows this shape and "done" still means live plus founder-tested on a real device.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 **Status:** active · **Adopted:** 2026-10-14
 
 How code gets to production — the same pipeline shape for every product,

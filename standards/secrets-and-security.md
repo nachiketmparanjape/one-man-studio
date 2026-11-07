@@ -1,5 +1,10 @@
 # Studio standard: secrets and security
 
+> **Purpose:** DECIDE — the settled secret-handling rules: no secret ever enters git, server secrets in Secret Manager, 600-perm local credentials, fail-fast config, and the leak playbook.
+> **Earns its place if:** a cut ships with no secret in its diff — and a leak gets rotated first and investigated second.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 **Status:** active · **Adopted:** 2026-10-14
 
 One leaked key ends the studio. This standard exists so secret handling

@@ -1,5 +1,10 @@
 # Studio standard: shareable cards
 
+> **Purpose:** DECIDE — the settled shape of a backlog card, written so two cold readers (the founder and an outside expert) can use it: status, plain words, checkable details, questions for a reader, history.
+> **Earns its place if:** a card handed to a knowledgeable friend earns a useful opinion on its own, without the founder vouching for its language.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 **Status:** active · **Adopted:** 2026-10-25 (founder: the
 cards are written by the agent and not monitored by him,
 so he cannot vouch for their language — yet a card is

@@ -1,5 +1,10 @@
 # The One-Man Studio Playbook
 
+> **Purpose:** DECIDE — the operating rules of the studio, public variant: sprints, paper cuts, triage, the verifier gate, and standing duties, as run day to day.
+> **Earns its place if:** a reader runs a sprint by these rules, or a new agent operates the studio from them — and a rule that stops being followed gets changed here, not ignored.
+> **Owner:** Founder decides; Bramble maintains. **Status:** living.
+> **Last verified:** 2026-11-06, against a read of this variant (head and known divergence points from the studio copy).
+
 A sprint system for one founder + one AI chief-of-staff, designed around a
 scattered brain: the system holds the structure so the founder doesn't have to.
 

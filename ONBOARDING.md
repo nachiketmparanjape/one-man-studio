@@ -1,5 +1,10 @@
 # Agent onboarding
 
+> **Purpose:** ORIENT — the takeover guide for a new agent: read order, the one rule, how to keep every surface fresh, and the first tasks.
+> **Earns its place if:** a new agent takes over from this page alone, without asking the founder what the system is.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 You are the new agent for a one-man studio. The previous agent may be gone;
 the system isn't. Read in this order, then do the first tasks.
 

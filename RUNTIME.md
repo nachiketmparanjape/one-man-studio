@@ -1,5 +1,10 @@
 # Runtime requirements
 
+> **Purpose:** OPERATE — what the system needs from its host (file access, git, Python, token, scheduler, long-command host) and what degrades gracefully without each.
+> **Earns its place if:** a new agent sets up the system from this page and knows exactly what breaks when a requirement is missing.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 What the one-man studio system needs from whatever hosts it — a human with
 an AI agent, a different agent next year, or a fully local setup. The
 system is plain markdown + Python scripts + GitHub; there is no proprietary

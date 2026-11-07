@@ -1,5 +1,10 @@
 # Studio standard: testing
 
+> **Purpose:** DECIDE — the settled testing rules: the pyramid studio-sized, what "verified" means per layer, and the founder's phone test as the acceptance layer.
+> **Earns its place if:** a cut reaches the founder's phone only after the headless layers are green, with the report stating what still needs human eyes.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file and the Decision 5 amendment in it.
+
 **Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: vanilla-JS repos use `*.test.js` + `node --test`; the phone test is the E2E layer where Playwright doesn't fit)
 
 Every studio app is verified the same way before it reaches the founder's

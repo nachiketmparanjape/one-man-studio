@@ -1,5 +1,10 @@
 # Studio standard: error handling
 
+> **Purpose:** DECIDE — the settled error-handling rules: the two-bucket taxonomy, HttpsError codes on the wire, error boundaries, structured logging, Sentry by default with the structured error ledger as a blessed equivalent.
+> **Earns its place if:** an error in any app is diagnosable in minutes because its shape is already known — and the user never sees internals.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file and the Decision 5 amendment in it.
+
 **Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: the structured error-ledger pattern is a blessed equivalent to Sentry) · **Research:**
 `research_notes/error-handling-standard.md`
 

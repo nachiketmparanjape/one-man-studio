@@ -1,5 +1,10 @@
 # Studio standards
 
+> **Purpose:** REFERENCE — the catalog of studio standards: which ones exist, what each covers, and where to read it.
+> **Earns its place if:** a new agent finds the right standard in one look instead of guessing or re-deciding a settled rule.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file.
+
 How every studio app does the boring-but-critical things — the same way,
 every time, without reinventing them per project. A topic earns "standard"
 status when at least two products need it and the practice is stable
@@ -9,7 +14,8 @@ enough to write down once.
 
 - [error-handling.md](error-handling.md) — the two-bucket taxonomy,
   HttpsError codes on the wire, boundary placement, structured logging,
-  Sentry on every product. Adopted 2026-10-14.
+  Sentry by default, structured error ledger as blessed equivalent.
+  Adopted 2026-10-14.
 - [testing.md](testing.md) — the pyramid studio-sized: plain unit tests,
   testable function handlers, emulator-over-mocks integration, rules
   tests, 5–8 E2E critical paths; what "verified" means per layer.
@@ -21,8 +27,9 @@ enough to write down once.
   for server secrets, `.env.example` committed, `600`-perm local
   credentials, fail-fast config, the per-cut security checklist, the
   leak playbook. Adopted 2026-10-14.
-- [code-style.md](code-style.md) — TS strict, ESLint + Prettier in CI,
-  naming, React and functions discipline. Adopted 2026-10-14.
+- [code-style.md](code-style.md) — TS strict by default (single-file
+  vanilla JS acceptable), ESLint + Prettier, naming, React and functions
+  discipline. Adopted 2026-10-14.
 - [ci-cd-and-deploys.md](ci-cd-and-deploys.md) — GitHub as source of
   truth, CI deploys Hosting only, functions/rules deploy manually
   after review, what "done" means, rollback before diagnosis.

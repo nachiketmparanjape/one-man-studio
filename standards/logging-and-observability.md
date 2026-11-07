@@ -1,5 +1,10 @@
 # Studio standard: logging and observability
 
+> **Purpose:** DECIDE — the settled observability rules: structured JSON logging, one correlation id per request, the three watch layers (error tracking, uptime, cost), and alert rules that each carry an action.
+> **Earns its place if:** a failure gets noticed within a day instead of surfacing weeks later in a user report.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file and the Decision 5 amendment in it.
+
 **Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: the error ledger and heartbeat probe are blessed equivalents to Sentry and UptimeRobot)
 
 Error handling *captures* failures; this standard is about *noticing*

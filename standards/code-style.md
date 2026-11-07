@@ -1,5 +1,10 @@
 # Studio standard: code style
 
+> **Purpose:** DECIDE — the settled code-style rules: TypeScript strict by default, a single-file vanilla-JS client acceptable, linting and formatting, naming, React and functions discipline.
+> **Earns its place if:** a cut's code follows these rules without re-litigating style, and any file is readable on first open six months later.
+> **Owner:** Bramble. **Status:** living.
+> **Last verified:** 2026-11-06, against a full read of the file and the Decision 5 amendment in it.
+
 **Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: a single-file vanilla-JS client is a blessed setup; test runner follows the stack)
 
 Four repos, one brain. Consistency is a feature when you're the whole
