@@ -1,6 +1,6 @@
 # Studio standard: error handling
 
-**Status:** active · **Adopted:** 2026-10-14 · **Research:**
+**Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: the structured error-ledger pattern is a blessed equivalent to Sentry) · **Research:**
 `research_notes/error-handling-standard.md`
 
 Every studio app handles errors the same way. Why this matters: without a
@@ -76,18 +76,26 @@ Rules:
 
 ## Error tracking
 
-- **Sentry on every product from day one.** Free tier (5,000 events/mo)
+- **Sentry is the default, from day one.** Free tier (5,000 events/mo)
   is plenty at our scale. It catches the errors that break silently —
   the ones no user ever reports.
+- **The structured error ledger is a blessed equivalent.** At our scale
+  a server-side ledger — one structured record per unexpected error,
+  with correlation id, queryable in the same store as the data — does
+  the job Sentry does, without a second service. The Closet runs this
+  pattern. Whichever one a product uses, the bar is the same: every
+  unexpected error is recorded with structure, and new error types get
+  noticed within a day.
 - Turn on spike protection immediately (metered plan — one bad deploy
-  shouldn't burn the month).
-- Server errors still go to structured logs first; Sentry is the
-  aggregator and alerter, not the only record.
+  shouldn't burn the month). (Sentry only; the ledger has no meter.)
+- Server errors still go to structured logs first; the tracker — Sentry
+  or the ledger — is the aggregator and alerter, not the only record.
 
 ## What we deliberately skip
 
 Datadog / New Relic / self-hosted Prometheus (enterprise scale we don't
-have); a custom error dashboard (that's just rebuilding Sentry badly);
+have); a custom error dashboard (that's just rebuilding Sentry badly —
+the ledger is a structured record, not a dashboard);
 inventing our own error JSON format (the platform already defines one).
 
 ## Verifier-gate checklist (error handling)
@@ -103,4 +111,5 @@ Before any cut reaches the founder's phone:
 - [ ] New feature regions are inside an error boundary; the root
       boundary exists
 - [ ] Server errors log with structure + correlation id
-- [ ] Sentry is wired (or a note says why this cut didn't need it)
+- [ ] Error tracking is wired — Sentry or the structured error ledger
+      (or a note says why this cut didn't need it)

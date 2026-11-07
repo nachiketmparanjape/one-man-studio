@@ -1,6 +1,6 @@
 # Studio standard: logging and observability
 
-**Status:** active · **Adopted:** 2026-10-14
+**Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: the error ledger and heartbeat probe are blessed equivalents to Sentry and UptimeRobot)
 
 Error handling *captures* failures; this standard is about *noticing*
 them. Why it matters: an error nobody sees is the same as an error that
@@ -31,11 +31,13 @@ gone. Our scale is tiny, so the whole system fits in one page.
 
 Three layers, proportional to our size — nothing more:
 
-1. **Error tracking (Sentry).** New error types alert immediately; that
-   is the whole point of Sentry. Spike protection on.
-2. **Uptime (UptimeRobot free tier).** Ping the homepage and one
-   authenticated API route every 5 minutes. Two consecutive failures =
-   something is actually down.
+1. **Error tracking (Sentry, or the structured error ledger).** New
+   error types alert immediately; that is the whole point of tracking.
+   Spike protection on (Sentry only).
+2. **Uptime (UptimeRobot free tier, or the heartbeat probe).** Ping the
+   homepage and one authenticated API route every 5 minutes — or run
+   the scheduled heartbeat probe that checks the same surfaces. Two
+   consecutive failures = something is actually down.
 3. **Cost (Firebase console).** The monthly curator already audits spend;
    the Blaze budget alert is the tripwire between audits.
 
@@ -47,11 +49,12 @@ it's a second job.
 
 Every alert needs a clear action — no alert without one:
 
-- **New error type in Sentry** → investigate within a day. If it's
+- **New error type in Sentry / new ledger entry** → investigate within a day. If it's
   benign, resolve it so it never pages again.
 - **Uptime check fails twice in a row** → site is down; drop everything.
-- **Error rate visibly spikes** (you'll see it in Sentry's graph; no
-  fake precision with percentages at our volume) → investigate.
+- **Error rate visibly spikes** (you'll see it in Sentry's graph or the
+  ledger; no fake precision with percentages at our volume) →
+  investigate.
 - **Blaze budget alert** → cost audit, immediately, not at month end.
 
 Alerts go where the founder actually looks: push, not email. Email is

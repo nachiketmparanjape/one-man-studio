@@ -1,6 +1,6 @@
 # Studio standard: testing
 
-**Status:** active · **Adopted:** 2026-10-14
+**Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: vanilla-JS repos use `*.test.js` + `node --test`; the phone test is the E2E layer where Playwright doesn't fit)
 
 Every studio app is verified the same way before it reaches the founder's
 phone. Why this matters: the founder's phone test is the *acceptance*
@@ -15,7 +15,8 @@ Each higher layer is thinner and fewer:
 
 1. **Unit** — pure logic: utils, formatters, prompt builders, validation,
    the error-code mapper. Fast, no mocks needed, co-located with the code
-   (`*.test.ts` next to the source). This is the bulk of the suite.
+   (`*.test.ts` — or `*.test.js` for vanilla-JS repos — next to the
+   source). This is the bulk of the suite.
 2. **Function logic** — every callable's *handler* is an exported plain
    function taking explicit inputs (`uid`, `data`, `db`) and returning a
    value or throwing `HttpsError`. The `onCall` wrapper is glue: auth
@@ -32,7 +33,10 @@ Each higher layer is thinner and fewer:
    `allow` line gets at least one "succeeds" and one "fails" case. A
    rules change without a test is a security change without a test.
 5. **E2E** — 5–8 critical paths max (sign in, add item, the core loop of
-   the app), Playwright, run against the emulator in CI. Selectors prefer
+   the app), Playwright, run against the emulator in CI. For a
+   single-file vanilla-JS client with no Playwright setup, the founder's
+   phone test is the E2E layer — the cut's report says so explicitly and
+   names the paths the phone test must cover. Selectors prefer
    `data-testid`, then ARIA roles, then visible text — never CSS classes,
    never `sleep()` waits (use `locator.waitFor()`). A flaky or
    unmaintained E2E suite is worse than none: fix it or delete it, never
@@ -51,7 +55,8 @@ This is the verifier gate's checklist, spelled out:
 - Client: the touched flows are exercised headlessly where possible
   (component tests via Testing Library, through public APIs the way a
   user would use them); the E2E critical paths still pass.
-- Types + lint: `tsc` and the linter clean. A green build alone is not
+- Types + lint: `tsc` and the linter clean — or the repo's equivalent
+  checks (`node --check` for vanilla JS). A green build alone is not
   "it works" — it's the entry ticket to the checks above.
 
 ## The founder's layer
@@ -73,7 +78,7 @@ maintenance burden kills a one-person team — critical paths only).
 
 Before any cut reaches the founder's phone:
 
-- [ ] `tsc` clean, linter clean, unit tests green
+- [ ] `tsc` clean (or the repo's equivalent checks), linter clean, unit tests green
 - [ ] New/changed function handlers have direct tests: happy path +
       auth rejections + every `HttpsError` code they throw
 - [ ] Anything touching Firestore/Storage/Auth exercised against the

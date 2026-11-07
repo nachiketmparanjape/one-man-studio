@@ -1,6 +1,6 @@
 # Studio standard: code style
 
-**Status:** active · **Adopted:** 2026-10-14
+**Status:** active · **Adopted:** 2026-10-14 · **Amended:** 2026-11-06 (founder Decision 5: a single-file vanilla-JS client is a blessed setup; test runner follows the stack)
 
 Four repos, one brain. Consistency is a feature when you're the whole
 team — it means any file is readable on first open, six months later,
@@ -8,13 +8,21 @@ without relearning someone's (your agent's) mood that week.
 
 ## The setup (every repo)
 
-- **TypeScript strict on.** `strict: true`, no `any` — use `unknown`
-  and narrow it. `satisfies` over `as` for type validation without
-  widening.
-- **ESLint + Prettier**, enforced in CI. Style arguments end at the
-  config file; humans (and agents) don't re-litigate formatting.
-- **Vite projects:** Vitest for unit tests. **Next.js projects:**
-  same. One test runner everywhere.
+- **TypeScript strict is the default.** `strict: true`, no `any` — use
+  `unknown` and narrow it. `satisfies` over `as` for type validation
+  without widening.
+- **A single-file vanilla-JS client is acceptable.** When a product's
+  client is genuinely one file with no build step (the Closet), plain
+  JavaScript checked with `node --check` / `node --test` is the blessed
+  setup — adopting TypeScript there would add a build pipeline to save
+  nothing. The naming, shape, and discipline rules below still apply
+  in full.
+- **ESLint + Prettier**, enforced in CI where the repo has working CI;
+  run locally before every cut where it doesn't. Style arguments end at
+  the config file; humans (and agents) don't re-litigate formatting.
+- **Test runner follows the stack.** Vitest for Vite and Next.js
+  projects; `node --test` for vanilla-JS Node code. One runner per repo,
+  not one runner everywhere.
 
 ## Naming and shape
 
