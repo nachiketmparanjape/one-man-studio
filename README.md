@@ -69,7 +69,7 @@ of four live products:
 | Product | What it is | Live | Code |
 |---|---|---|---|
 | Closet | AI wardrobe stylist | [app](https://closet-404e9.web.app) | [repo](https://github.com/nachiketmparanjape/the-closet) |
-| Fluencia | AI language tutor | [app](https://fluencia.vercel.app) | private |
+| Fluencia | AI language tutor | [app](https://fluencia-two.vercel.app) | private |
 | One at a Time | Next-right-thing task picker | [app](https://oneatatime-seven.vercel.app) | [repo](https://github.com/nachiketmparanjape/one_at_a_time) |
 | Vocab Quiz | Personal vocab, spaced repetition | [app](https://vocabquiz-lake.vercel.app) | [repo](https://github.com/nachiketmparanjape/vocab_quiz) |
 
