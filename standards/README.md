@@ -44,6 +44,15 @@ enough to write down once.
 - [shareable-cards.md](shareable-cards.md) — backlog cards written so
   two cold readers can use them: status, plain-words summary, checkable
   details, questions for a reader, history. Adopted 2026-10-25.
+- [ui-unslop.md](ui-unslop.md) — the UI unslop checklist (Charles Liu's
+  20 ways): the critic's rubric for design review and the 2-minute pass
+  in the verifier gate for any cut that touches UI.
+  Adopted 2026-11-07.
+- [coding-principles.md](coding-principles.md) — the four rules for how
+  code gets written in every cut: think first, keep it simple, change
+  only what the card needs, verify against stated criteria (Karpathy
+  guidelines, adapted to studio vocabulary).
+  Adopted 2026-11-08.
 
 **Proposing a new standard:** it goes through research and founder
 approval like any paper cut, then lives here. If only one product
