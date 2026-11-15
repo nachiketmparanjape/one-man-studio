@@ -7,6 +7,8 @@
 
 Published copy: https://github.com/nachiketmparanjape/one-man-studio/blob/main/WORKFLOWS.md — kept diff-zero with this file; the Mermaid diagrams render natively on GitHub.
 
+Diagram currency: if this file changes a number, status, or structure shown on the Process Health Diagram Space, send the Space edit in the same pass (PLAYBOOK.md: diagram currency).
+
 ## What this is, in plain words
 
 The PLAYBOOK's rule: anything we do more than twice, or anything where

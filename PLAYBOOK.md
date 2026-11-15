@@ -137,8 +137,11 @@ workflow, no reliability; no reliability, no trust.
   definition) and are registered below (the human-readable map).
 - New workflows get proposed by either of us — usually surfacing through the
   retro question — and added here once they've earned their keep.
-- Long-term: a visual map of these, so the founder can verify at a glance
-  that the system runs the way they expect.
+- **Visual map (live since 2026-11-06):** the Orchestration and Design
+  Catalog is the visual map of these workflows and every scheduled
+  orchestration — one diagram per orchestration, one per key design.
+  New orchestrations get a diagram and a catalog entry at creation; a
+  retired job leaves the active list the same week it is disabled.
 
 Current workflows:
 - **Request triage** (`studio-triage`) — every request → classify → announce
@@ -156,6 +159,16 @@ Current workflows:
 - **Standing duties** — tool scout, curator + cost audit, competitor watch,
   doc review (see below); scheduled, inbox-reported, founder interrupted
   only on signal.
+
+### Diagrams stay current
+A diagram is a claim about the system, like prose. Two rules keep the
+visual map honest: (1) when a change to a source document moves a
+number, status, or structure the map shows, the map update ships in the
+same pass — the source change is not done until the map agrees with it;
+(2) the monthly doc review checks the map against its sources, and a
+figure that disagrees with its source is flagged stale, like a wrong
+paragraph. A map that disagrees with its source is a bug, not a backlog
+item.
 
 ## Anti-scatter rules
 
