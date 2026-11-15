@@ -109,6 +109,9 @@ trail: two sprint plans and its shipped log, unedited.
   duties, friction log) against the last 30 days of shipped work and
   writes a plain-language report; below 90% two months running, the
   process gets a corrective paper cut instead of a lecture.
+  `WORKFLOWS.md` — one flowchart per studio workflow (triage, sprint
+  loop, planning walk, monthly machinery, friction, capability intake),
+  each showing the real branches and the machinery at each step.
 - `case-study/` — one product's real sprint plans and shipped log.
 - `RUNTIME.md` — what the system needs from its host (token, scheduler, …)
   and what degrades gracefully without each. The agent-agnosticism contract.
