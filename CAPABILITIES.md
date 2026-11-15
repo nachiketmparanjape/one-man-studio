@@ -3,7 +3,7 @@
 > **Purpose:** OPERATE — the list of what the studio promises to do, the proof each promise must leave, and how the monthly check measures whether the proof is there.
 > **Earns its place if:** a new capability enters with its evidence rule, and a monthly check proves the process is still followed — without the founder having to go looking.
 > **Owner:** Bramble. **Status:** living.
-> **Last verified:** 2026-11-15, against the first `health_check.py` run (see `health-reviews/2026-11.md`).
+> **Last verified:** 2026-11-15, against the second `health_check.py` run with H8 (see `health-reviews/2026-11.md`).
 
 Published copy: https://github.com/nachiketmparanjape/one-man-studio/blob/main/CAPABILITIES.md — kept diff-zero with this file; the Mermaid diagrams render natively on GitHub.
 
@@ -81,10 +81,11 @@ leaves, not the step itself.
 | Curator | Monthly on the 22nd: backlog hygiene, cost audit, competitor watch | Inbox curator entry exists that month | AUTO — check H6 |
 | Tool scout | Monthly on the 15th: finds with verdicts, sheet rows | Inbox scout entry + Tool Library rows | AUTO — check H6 |
 | Mirror sync | GitHub Issues match the docs | A mirror run with no drift, or drift recorded | SAMPLE — run mirror, report drift |
-| Inbox | Ideas parked with revisit triggers; decisions recorded | Inbox entries carry dispositions | SAMPLE |
-| Friction log | Complaints become paper cuts | friction.md entries carry a disposition or a paper-cut link | AUTO — check H7 |
+| Inbox | Ideas parked with revisit triggers; decisions recorded | Inbox entries carry a status line (LOGS.md) | AUTO — check H8 |
+| Friction log | Complaints become paper cuts | friction.md entries carry a status line (LOGS.md) | AUTO — checks H7 + H8 |
 | SHIPPED currency | Every shipped cut is recorded | SHIPPED entries match sprint PLAN DONE cards | AUTO — check H1 |
 | Tool Library truth | Sheet verdicts match the inbox verdicts | Sheet row verdict = latest inbox verdict | AUTO — check H4 |
+| Log hygiene | Every log entry carries a status, owner, priority, and next action; finished entries leave the live file in 30 days | Status lines in inbox.md + friction.md; archive files grow by finished entries | AUTO — check H8 |
 
 ### Trial capabilities (the November pilots)
 
@@ -155,6 +156,10 @@ the end of the loop, not outside it.
   curator (22nd) each left their dated record this month.
 - **H7 — Friction log current.** friction.md entries carry a disposition
   or a paper-cut link; no entry older than 30 days without one.
+- **H8 — Log hygiene.** Every inbox + friction entry carries a status line
+  (H8a); no OPEN entry older than 30 days (H8b); DONE/DEAD entries leave
+  the live file within 30 days (H8c). The check's rate is the lowest of
+  the three sub-rates.
 
 Sample: SHIPPED entries dated in the last 30 days. A product with no recent
 shipped entries reports "no sample", not a failure. A check the script cannot

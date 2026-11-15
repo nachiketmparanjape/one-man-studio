@@ -50,7 +50,10 @@ flowchart TD
 
 Proof lives in: the triage line in chat; the outcome in the sprint plan,
 `SHIPPED.md`, `friction.md`, inbox, or `PRODUCT.md` — never chat-only.
-When torn between two types, pick the heavier one.
+Every log entry carries a `**Status:**` line at write time (LOGS.md) —
+status, owner, priority, next action or revisit trigger — so the entry
+is not logged until it is tagged. When torn between two types, pick the
+heavier one.
 
 ## 2. Paper-cut lifecycle — the sprint loop
 

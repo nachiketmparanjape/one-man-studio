@@ -23,6 +23,8 @@ Rules of this script (the doc-honesty lesson applies to itself):
   failure.
 - Threshold: 90% per check; two consecutive months below 90% on the same
   check means corrective action (a paper cut).
+- H8 (log hygiene, LOGS.md) has three sub-rates; the check's rate is the
+  lowest of the three, and the report names all three.
 
 Usage: python3 health_check.py [--month YYYY-MM] [--window-days N]
 """
@@ -37,6 +39,8 @@ STUDIO = Path.home() / "workspace" / "studio"
 SHEET_ID = "1UOZsZXub10p14HE1V2Hjz8TOfuorDy4CirB7U7AfUZE"
 THRESHOLD = 0.90
 WINDOW_DAYS = 30
+RETENTION_DAYS = 30  # DONE/DEAD log entries older than this leave the live file
+LOG_STATUS_RE = re.compile(r"^\*\*Status:\*\*\s*(OPEN|PARKED|DONE|DEAD)\b", re.M)
 
 CARD_RE = re.compile(r"^- \*\*((?:PC|UX|AUTH|BUG)-\d+)", re.M)
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
@@ -285,10 +289,65 @@ def check_h7():
         if not dm:
             continue
         body = text[start:end].lower()
-        has = bool(re.search(r"paper cut|pc-|disposition|fixed|closed|"
-                             r"parked|wontfix|won't fix", body))
+        # A Status line IS a disposition now (LOGS.md); the keyword list
+        # is the older heuristic for entries that predate the lines.
+        has = bool(LOG_STATUS_RE.search(text[start:end])) or bool(
+            re.search(r"paper cut|pc-|disposition|fixed|closed|"
+                      r"parked|wontfix|won't fix", body))
         entries.append((date.fromisoformat(dm.group(1)), header, has))
     return entries, None
+
+
+def log_entries(path):
+    """(date, header, status-or-None) for dated ## sections of a log file.
+    Sections without a date (dividers like the inbox's 'Studio system
+    ideas') are skipped and counted, not treated as entries. The status
+    match is strict: only OPEN/PARKED/DONE/DEAD after '**Status:**' count
+    — a body line like '**Status:** research complete' does not."""
+    if not path.exists():
+        return [], 0
+    text = path.read_text()
+    matches = list(SECTION_RE.finditer(text))
+    entries, skipped = [], 0
+    for i, m in enumerate(matches):
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        header = m.group(1)
+        dm = DATE_RE.search(header)
+        if not dm:
+            skipped += 1
+            continue
+        sm = LOG_STATUS_RE.search(text[start:end])
+        entries.append((date.fromisoformat(dm.group(1)), header,
+                        sm.group(1) if sm else None))
+    return entries, skipped
+
+
+def check_h8(today):
+    """Log hygiene (LOGS.md) over inbox.md + friction.md. Three sub-rates:
+    H8a every entry tagged; H8b no stale OPEN (older than RETENTION_DAYS);
+    H8c finished entries leave (DONE/DEAD in the live file are at most
+    RETENTION_DAYS old). Returns {sub: (pairs, failing)} + skipped count."""
+    entries, skipped = [], 0
+    for name in ("inbox.md", "friction.md"):
+        es, sk = log_entries(STUDIO / name)
+        entries += [(d, "%s: %s" % (name, h), s) for d, h, s in es]
+        skipped += sk
+    tagged = [(d, h, s is not None) for d, h, s in entries]
+    open_entries = [(d, h) for d, h, s in entries if s == "OPEN"]
+    open_fresh = [(d, h, (today - d).days <= RETENTION_DAYS)
+                  for d, h in open_entries]
+    done_entries = [(d, h) for d, h, s in entries if s in ("DONE", "DEAD")]
+    done_fresh = [(d, h, (today - d).days <= RETENTION_DAYS)
+                  for d, h in done_entries]
+    return {
+        "a": (tagged, [h for d, h, ok in tagged if not ok]),
+        "b": (open_fresh,
+              ["%s — %s" % (d, h) for d, h, ok in open_fresh if not ok]),
+        "c": (done_fresh,
+              ["%s — %s" % (d, h) for d, h, ok in done_fresh if not ok]),
+        "skipped": skipped,
+    }
 
 
 def rate(pairs):
@@ -369,6 +428,26 @@ def main():
                                  "the log has been silent since Oct 24."
                                  if not recent else None)}
 
+    h8 = check_h8(today)
+    h8_subs = {}
+    for sub, label in [("a", "every entry tagged"),
+                       ("b", "no stale OPEN"),
+                       ("c", "finished entries leave")]:
+        pairs, failing = h8[sub]
+        passed, total, r = rate(pairs)
+        h8_subs[sub] = {"label": label, "passed": passed, "total": total,
+                         "rate": r, "failing": failing}
+    defined = [s for s in h8_subs.values() if s["rate"] is not None]
+    worst = min(defined, key=lambda s: s["rate"]) if defined else None
+    checks["H8"] = {"label": "Log hygiene", "subs": h8_subs,
+                    "passed": worst["passed"] if worst else 0,
+                    "total": worst["total"] if worst else 0,
+                    "rate": worst["rate"] if worst else None,
+                    "failing": [f for s in h8_subs.values()
+                                for f in s["failing"]],
+                    "note": ("skipped %d undated section(s)"
+                             % h8["skipped"] if h8["skipped"] else None)}
+
     prev = prev_month_json(month)
     overall = "GREEN"
     for k, c in checks.items():
@@ -393,7 +472,7 @@ def main():
              "**Overall: %s** (threshold %.0f%% per check; two consecutive "
              "months below means corrective action.)" % (overall, THRESHOLD * 100),
              ""]
-    for k in ["H1", "H2", "H3", "H4", "H5", "H6", "H7"]:
+    for k in ["H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8"]:
         c = checks[k]
         if c["rate"] is None:
             lines.append("- **%s — %s: unmeasured** (%s)"
@@ -403,6 +482,15 @@ def main():
         lines.append("- **%s — %s: %s** — %d/%d (%.0f%%)"
                      % (k, c["label"], status, c["passed"], c["total"],
                         c["rate"] * 100))
+        if c.get("subs"):
+            for sk, s in c["subs"].items():
+                if s["rate"] is None:
+                    lines.append("  - H8%s %s: unmeasured (no sample)"
+                                 % (sk, s["label"]))
+                else:
+                    lines.append("  - H8%s %s: %d/%d (%.0f%%)"
+                                 % (sk, s["label"], s["passed"], s["total"],
+                                    s["rate"] * 100))
         for f in c["failing"]:
             lines.append("  - %s" % f)
         if c.get("no_evidence"):
@@ -420,6 +508,9 @@ def main():
               "- H3 counts 'Awaiting phone test' as not verified.",
               "- A product with no shipped entries in the window reports "
               "no sample, not a failure.",
+              "- H8 is the binding sub-rate: the check passes only if "
+              "tagging, freshness of OPEN items, and archiving of finished "
+              "items all clear 90%.",
               ""]
     (out_dir / ("%s.md" % month)).write_text("\n".join(lines))
     print("\n".join(lines))

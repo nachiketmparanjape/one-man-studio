@@ -1,7 +1,4 @@
----
-name: "studio-triage"
-description: "Triage any founder request in the one-man studio: classify it (bug, quick-fix, paper-cut, research, idea, question), announce the routing in one line, and hand off to the right workflow with the right log destination. Trigger on every actionable request in a product thread or studio HQ."
----
+
 
 # Studio Triage
 
@@ -35,13 +32,17 @@ system.
    - research → PRODUCT.md research section
    - idea → inbox.md
    - any decision → the relevant doc, never chat-only
+   Every log entry gets a `**Status:**` line at write time (LOGS.md) —
+   status (OPEN / PARKED / DONE / DEAD), owner, priority (now / next /
+   later), and a next action or revisit trigger. An entry is not logged
+   until it is tagged.
 
 ## Output Contract
 
 - The user always sees the triage line or card before work starts.
 - No build starts on a bug without a diagnosis step.
 - No feature ships without its card in the sprint plan.
-- Every request ends logged in a file.
+- Every request ends logged in a file, with its Status line.
 
 ## Operating Rules
 
@@ -55,3 +56,7 @@ system.
    guessing the type.
 5. This skill triggers on every actionable request, including ones that look
    trivial. Especially those.
+## Available connectors
+
+Use `muse.connector_search` to find the current connector docs before following
+recovered instructions.

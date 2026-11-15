@@ -112,6 +112,9 @@ trail: two sprint plans and its shipped log, unedited.
   `WORKFLOWS.md` — one flowchart per studio workflow (triage, sprint
   loop, planning walk, monthly machinery, friction, capability intake),
   each showing the real branches and the machinery at each step.
+  `LOGS.md` — log housekeeping: every log entry carries a status, owner,
+  priority, and next action (check H8); finished entries leave the live
+  file for a monthly archive after 30 days.
 - `case-study/` — one product's real sprint plans and shipped log.
 - `RUNTIME.md` — what the system needs from its host (token, scheduler, …)
   and what degrades gracefully without each. The agent-agnosticism contract.
