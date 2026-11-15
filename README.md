@@ -101,6 +101,14 @@ trail: two sprint plans and its shipped log, unedited.
   — the public paper-cut mirror: every committed cut across products,
   synced from the markdown by `mirror.py` (same "generated, not hand-edited"
   rule as the dashboard). Filter by `label:studio-mirror`.
+- `CAPABILITIES.md` — the process-health register: every capability the
+  studio promises, the proof each must leave, and how the monthly check
+  measures whether the proof is there. The diagrams render natively on
+  GitHub. `health_check.py` runs the seven checks (card traceability,
+  gate and phone evidence, Tool Library truth, standards cited, monthly
+  duties, friction log) against the last 30 days of shipped work and
+  writes a plain-language report; below 90% two months running, the
+  process gets a corrective paper cut instead of a lecture.
 - `case-study/` — one product's real sprint plans and shipped log.
 - `RUNTIME.md` — what the system needs from its host (token, scheduler, …)
   and what degrades gracefully without each. The agent-agnosticism contract.
