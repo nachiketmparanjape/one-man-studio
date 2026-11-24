@@ -47,6 +47,20 @@ Add hats (designer, marketer) only when a product earns them, never before.
   error handling), reporting what was checked and what still needs
   human eyes. The founder's phone test is the final gate, never the first
   debugging pass.
+- **QA + fix phase (2026-11-23, founder-approved):** for products with the
+  QA loop on, the sprint does not close at deploy. A signed-in QA round
+  runs on the sprint's cards (QA-LOOP.md), its P1 findings become cards
+  (cap 5), one fix pass builds them, and a retest round confirms the
+  fixes. Only then does the founder test on his phone. The loop is
+  optional per product: when a product joins the studio, the system asks
+  whether the QA loop should be added for it, and the answer is recorded
+  in the product's PRODUCT.md. The Closet is on. New products: ask, no
+  default. The planning walk can skip the phase for one sprint by
+  decision. If the sign-in approval does not arrive, the sprint stays
+  open and the round retries at the next Friday; the founder can override
+  with "ship without QA". A sprint-triggered round replaces the nearest
+  Friday round — no week gets two rounds. Sprint 33 ran this shape ad
+  hoc; Sprint 34 is the second fix pass it produced.
 - **Review + retro, 15 min:** demo what shipped, then one retro question:
   *"What should we change about how we work?"*
 
@@ -147,7 +161,8 @@ Current workflows:
 - **Request triage** (`studio-triage`) — every request → classify → announce
   → route → log.
 - **Sprint loop** — plan (with constitution check) → build → verifier gate →
-  review + retro (see above).
+  QA round + fix pass + retest (products with the QA loop on) → founder
+  phone test → review + retro (see above).
 - **Research before building** — topic → findings → decision (see above).
 - **Dashboard refresh** — regenerate → redeploy, after planning / shipping /
   inbox triage (procedure in `dashboard.py`).
@@ -244,7 +259,9 @@ inbox and only interrupts the founder when something earns it.
   - `VISION.md` — purpose, v1 scope, explicit non-goals.
   - `BACKLOG.md` — paper-cut cards waiting for a sprint.
   - `SHIPPED.md` — per-update history (the changelog PRODUCT.md isn't).
-  - `sprints/<n>/PLAN.md` — the sprint plan and its notes.
+  - `sprints/<n>/PLAN.md` — the sprint plan and its notes. For products
+    with the QA loop on, the plan carries a "QA + fix" section: the round
+    report link, the cards filed, the fix commits, and the retest result.
 - **Studio HQ dashboard** (https://bramble-studio.web.app): the visual view
   over all of the above — per product, what shipped, what's in flight, the
   pipeline, and the inbox, with full paper-cut granularity on expand.

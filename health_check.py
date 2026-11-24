@@ -26,7 +26,8 @@ Rules of this script (the doc-honesty lesson applies to itself):
 - H8 (log hygiene, LOGS.md) has three sub-rates; the check's rate is the
   lowest of the three, and the report names all three.
 - H9 (weekly QA, QA-LOOP.md) counts completed round reports vs Fridays due
-  since the loop started (2026-11-23); a skipped round is not a run.
+  since the loop started (2026-11-23); a skipped round is not a run. A
+  sprint-triggered round in a week covers that week's Friday.
 
 Usage: python3 health_check.py [--month YYYY-MM] [--window-days N]
 """
@@ -358,8 +359,9 @@ def check_h8(today):
 
 def check_h9(month, today):
     """Weekly QA rounds due vs run this month. Due: Fridays from the loop
-    start (2026-11-23) to today. Run: a qa-rounds report dated that Friday
-    whose first line says completed. A skipped round is not a run."""
+    start (2026-11-23) to today. Run: a completed qa-rounds report in the
+    week (Mon-Sun) of that Friday — a Friday round or a sprint-triggered
+    round. A skipped round is not a run."""
     y, m = int(month[:4]), int(month[5:7])
     first = max(date(y, m, 1), QA_LOOP_START)
     fridays = []
@@ -381,7 +383,11 @@ def check_h9(month, today):
             first_line = lines[0].lower() if lines else ""
             if "completed" in first_line and "skipped" not in first_line:
                 completed.add(fd)
-    return [(d, d in completed) for d in fridays]
+    def covered(friday):
+        monday = friday - timedelta(days=4)
+        sunday = friday + timedelta(days=2)
+        return any(monday <= c <= sunday for c in completed)
+    return [(d, covered(d)) for d in fridays]
 
 
 def rate(pairs):
@@ -554,7 +560,8 @@ def main():
               "items all clear 90%.",
               "- H9 counts completed QA round reports against Fridays due "
               "since the loop started (2026-11-23). A skipped round is "
-              "not a run.",
+              "not a run. A sprint-triggered round in a week covers that "
+              "week's Friday.",
               ""]
     (out_dir / ("%s.md" % month)).write_text("\n".join(lines))
     print("\n".join(lines))
