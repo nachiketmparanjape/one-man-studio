@@ -3,7 +3,7 @@
 > **Purpose:** OPERATE — the list of what the studio promises to do, the proof each promise must leave, and how the monthly check measures whether the proof is there.
 > **Earns its place if:** a new capability enters with its evidence rule, and a monthly check proves the process is still followed — without the founder having to go looking.
 > **Owner:** Bramble. **Status:** living.
-> **Last verified:** 2026-11-15, against the second `health_check.py` run with H8 (see `health-reviews/2026-11.md`).
+> **Last verified:** 2026-11-23, against the QA loop build (H9 added; see `health-reviews/2026-11.md` after the next run).
 
 Published copy: https://github.com/nachiketmparanjape/one-man-studio/blob/main/CAPABILITIES.md — kept diff-zero with this file; the Mermaid diagrams render natively on GitHub.
 
@@ -88,6 +88,7 @@ leaves, not the step itself.
 | SHIPPED currency | Every shipped cut is recorded | SHIPPED entries match sprint PLAN DONE cards | AUTO — check H1 |
 | Tool Library truth | Sheet verdicts match the inbox verdicts | Sheet row verdict = latest inbox verdict | AUTO — check H4 |
 | Log hygiene | Every log entry carries a status, owner, priority, and next action; finished entries leave the live file in 30 days | Status lines in inbox.md + friction.md; archive files grow by finished entries | AUTO — check H8 |
+| Weekly QA loop | The live app gets a signed-in QA round every Friday | A round report + filed cards each week (QA-LOOP.md) | AUTO — check H9 |
 
 ### Trial capabilities (the November pilots)
 
@@ -162,6 +163,8 @@ the end of the loop, not outside it.
   (H8a); no OPEN entry older than 30 days (H8b); DONE/DEAD entries leave
   the live file within 30 days (H8c). The check's rate is the lowest of
   the three sub-rates.
+- **H9 — Weekly QA rounds ran.** Completed round reports vs Fridays due
+  since the loop started (2026-11-23). A skipped round is not a run.
 
 Sample: SHIPPED entries dated in the last 30 days. A product with no recent
 shipped entries reports "no sample", not a failure. A check the script cannot

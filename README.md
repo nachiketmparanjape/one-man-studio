@@ -104,9 +104,9 @@ trail: two sprint plans and its shipped log, unedited.
 - `CAPABILITIES.md` — the process-health register: every capability the
   studio promises, the proof each must leave, and how the monthly check
   measures whether the proof is there. The diagrams render natively on
-  GitHub. `health_check.py` runs the seven checks (card traceability,
+  GitHub. `health_check.py` runs the nine checks (card traceability,
   gate and phone evidence, Tool Library truth, standards cited, monthly
-  duties, friction log) against the last 30 days of shipped work and
+  duties, friction log, log hygiene, weekly QA rounds) against the last 30 days of shipped work and
   writes a plain-language report; below 90% two months running, the
   process gets a corrective paper cut instead of a lecture.
   `WORKFLOWS.md` — one flowchart per studio workflow (triage, sprint
@@ -115,6 +115,9 @@ trail: two sprint plans and its shipped log, unedited.
   `LOGS.md` — log housekeeping: every log entry carries a status, owner,
   priority, and next action (check H8); finished entries leave the live
   file for a monthly archive after 30 days.
+  `QA-LOOP.md` — the weekly signed-in QA loop: one scoped round each
+  Friday, findings filed as backlog cards under a hard cap of 5
+  (check H9).
 - `case-study/` — one product's real sprint plans and shipped log.
 - `RUNTIME.md` — what the system needs from its host (token, scheduler, …)
   and what degrades gracefully without each. The agent-agnosticism contract.

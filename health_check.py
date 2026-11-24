@@ -25,6 +25,8 @@ Rules of this script (the doc-honesty lesson applies to itself):
   check means corrective action (a paper cut).
 - H8 (log hygiene, LOGS.md) has three sub-rates; the check's rate is the
   lowest of the three, and the report names all three.
+- H9 (weekly QA, QA-LOOP.md) counts completed round reports vs Fridays due
+  since the loop started (2026-11-23); a skipped round is not a run.
 
 Usage: python3 health_check.py [--month YYYY-MM] [--window-days N]
 """
@@ -41,6 +43,9 @@ THRESHOLD = 0.90
 WINDOW_DAYS = 30
 RETENTION_DAYS = 30  # DONE/DEAD log entries older than this leave the live file
 LOG_STATUS_RE = re.compile(r"^\*\*Status:\*\*\s*(OPEN|PARKED|DONE|DEAD)\b", re.M)
+QA_LOOP_START = date(2026, 11, 23)
+QA_ROUNDS_DIR = (Path.home() / "workspace" / "goals" /
+                 "one-man-studio-operating-system" / "hidden_files" / "qa-rounds")
 
 CARD_RE = re.compile(r"^- \*\*((?:PC|UX|AUTH|BUG)-\d+)", re.M)
 DATE_RE = re.compile(r"(\d{4}-\d{2}-\d{2})")
@@ -50,7 +55,8 @@ STANDARDS = ["error-handling", "testing", "code-style", "logging",
              "design-documents", "shareable-cards", "ui-unslop",
              "coding-principles"]
 SKILLS = ["context7", "coderabbit", "studio-research", "studio-triage",
-          "studio-doc-review", "ats-resume-tailoring", "coding-principles"]
+          "studio-doc-review", "ats-resume-tailoring", "coding-principles",
+          "weekly-qa"]
 VERDICT_LINE_RE = re.compile(
     r"→\s*(?P<arrow>try|park|skip)"
     r"|\b(?P<label>try|park|skip)\b\s*[—\-:]"
@@ -350,6 +356,34 @@ def check_h8(today):
     }
 
 
+def check_h9(month, today):
+    """Weekly QA rounds due vs run this month. Due: Fridays from the loop
+    start (2026-11-23) to today. Run: a qa-rounds report dated that Friday
+    whose first line says completed. A skipped round is not a run."""
+    y, m = int(month[:4]), int(month[5:7])
+    first = max(date(y, m, 1), QA_LOOP_START)
+    fridays = []
+    d = first
+    while d <= today and d.month == m:
+        if d.weekday() == 4:
+            fridays.append(d)
+        d += timedelta(days=1)
+    completed = set()
+    if QA_ROUNDS_DIR.exists():
+        for f in QA_ROUNDS_DIR.glob("*.md"):
+            dm = DATE_RE.search(f.name)
+            if not dm:
+                continue
+            fd = date.fromisoformat(dm.group(1))
+            if fd.strftime("%Y-%m") != month:
+                continue
+            lines = f.read_text().splitlines()
+            first_line = lines[0].lower() if lines else ""
+            if "completed" in first_line and "skipped" not in first_line:
+                completed.add(fd)
+    return [(d, d in completed) for d in fridays]
+
+
 def rate(pairs):
     """(passed, total, rate) for a list of (…, bool)."""
     total = len(pairs)
@@ -428,6 +462,13 @@ def main():
                                  "the log has been silent since Oct 24."
                                  if not recent else None)}
 
+    h9_pairs = check_h9(month, today)
+    h9_passed, h9_total, h9_rate = rate(h9_pairs)
+    checks["H9"] = {"label": "Weekly QA rounds ran", "passed": h9_passed,
+                    "total": h9_total, "rate": h9_rate,
+                    "failing": ["%s — no completed round report" % d
+                                for d, ok in h9_pairs if not ok]}
+
     h8 = check_h8(today)
     h8_subs = {}
     for sub, label in [("a", "every entry tagged"),
@@ -472,7 +513,7 @@ def main():
              "**Overall: %s** (threshold %.0f%% per check; two consecutive "
              "months below means corrective action.)" % (overall, THRESHOLD * 100),
              ""]
-    for k in ["H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8"]:
+    for k in ["H1", "H2", "H3", "H4", "H5", "H6", "H7", "H8", "H9"]:
         c = checks[k]
         if c["rate"] is None:
             lines.append("- **%s — %s: unmeasured** (%s)"
@@ -511,6 +552,9 @@ def main():
               "- H8 is the binding sub-rate: the check passes only if "
               "tagging, freshness of OPEN items, and archiving of finished "
               "items all clear 90%.",
+              "- H9 counts completed QA round reports against Fridays due "
+              "since the loop started (2026-11-23). A skipped round is "
+              "not a run.",
               ""]
     (out_dir / ("%s.md" % month)).write_text("\n".join(lines))
     print("\n".join(lines))
